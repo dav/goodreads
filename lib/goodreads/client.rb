@@ -68,6 +68,13 @@ module Goodreads
       Hashie::Mash.new(data['user'])
     end
     
+    # list a shelf
+    def shelf_reviews(id, shelf, opts = {})
+      options = {:v => 2, :shelf => shelf}.merge(opts)
+      data = request('/review/list/'+id.to_s+'.xml', options)
+      Hashie::Mash.new(data['reviews'])
+    end
+    
     private
     
     # Perform an API request
